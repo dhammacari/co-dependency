@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madhyamaka: Two Truths (TH/EN)</title>
+    <style>
+        /* สไตล์ Dark Mode & Minimalist ตามแบบฉบับของคุณ */
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, 'Prompt', sans-serif; /* เพิ่ม Font สำหรับภาษาไทย */
+            overflow: hidden;
+        }
+
+        /* ปุ่มสลับภาษาแบบเรียบง่าย */
+        .lang-toggle {
+            position: absolute;
+            top: 40px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: #555;
+            cursor: pointer;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .lang-btn.active {
+            color: #ffffff;
+            border-bottom: 1px solid #ffffff;
+        }
+
+        .lang-btn:hover {
+            color: #888;
+        }
+
+        /* ส่วนแสดงผลสมมติสัจจะ */
+        .content-area {
+            text-align: center;
+            max-width: 85%;
+        }
+
+        .conventional-truth {
+            font-size: 2.2rem;
+            font-weight: 300;
+            cursor: default;
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 2px;
+            line-height: 1.5;
+        }
+
+        /* ปรมัตถสัจจะ: เมื่อเจาะลึกลงไปจะพบความว่าง (Sunyata) */
+        .conventional-truth:hover {
+            opacity: 0;
+            filter: blur(15px);
+            transform: scale(0.95);
+            letter-spacing: 12px;
+        }
+
+        .instruction {
+            position: absolute;
+            bottom: 40px;
+            font-size: 0.75rem;
+            color: #333;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('th')">THAI</button>
+        <button class="lang-btn" onclick="setLang('en')">ENGLISH</button>
+    </div>
+
+    <div class="content-area">
+        <div id="text-display" class="conventional-truth">
+            "สิ่งใดเกิดจากเหตุปัจจัย... สิ่งนั้นย่อมเป็นความว่าง"
+        </div>
+    </div>
+
+    <div class="instruction" id="ins-display">
+        [ ลองนำเมาส์สัมผัสที่ตัวอักษร เพื่อมองผ่าน 'สมมติ' ไปสู่ 'ความว่าง' ]
+    </div>
+
+    <script>
+        const content = {
+            th: {
+                quote: '"สิ่งใดเกิดจากเหตุปัจจัย... สิ่งนั้นย่อมเป็นความว่าง"',
+                ins: "[ ลองนำเมาส์สัมผัสที่ตัวอักษร เพื่อมองผ่าน 'สมมติ' ไปสู่ 'ความว่าง' ]"
+            },
+            en: {
+                quote: '"Whatever is dependently co-arisen... That is stated to be emptiness."',
+                ins: "[ Hover to see through the 'Convention' into 'Emptiness' ]"
+            }
+        };
+
+        function setLang(lang) {
+            // อัปเดตเนื้อหา
+            document.getElementById('text-display').innerText = content[lang].quote;
+            document.getElementById('ins-display').innerText = content[lang].ins;
+
+            // อัปเดตสถานะปุ่ม
+            const btns = document.querySelectorAll('.lang-btn');
+            btns.forEach(btn => {
+                if (btn.innerText.toLowerCase() === lang || (btn.innerText === 'THAI' && lang === 'th') || (btn.innerText === 'ENGLISH' && lang === 'en')) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
